@@ -1,11 +1,13 @@
 # This is the hangman game
 
 
+
 def hangman():
+    game_guesses = 8
     word = input("What is your word? \n")
     length_word = len(word)
     theme = input("What is the theme of the word? \n")
-    print("Guesses left: ", length_word)
+    print("Guesses left: ", game_guesses)
     print("The theme is: ", theme)
     counter = 0
     underscore = []
@@ -22,7 +24,7 @@ def hangman():
     indicies = []
     wrong_guesses = 0
 
-    while wrong_guesses != len(word) - 1:
+    while game_guesses != 0:
         print("If you want to guess the word press 1!")
         letter = input("Guess a letter \n")
         if letter == "1":
@@ -33,8 +35,8 @@ def hangman():
             else:
                 print("That is not correct! \n")
                 wrong_guesses += 1
-                length_word -= 1
-                print_info(word, length_word, theme, letter, indicies, underscore)
+                game_guesses -= 1
+                print_info(word, game_guesses, theme, letter, indicies, underscore)
 
                 continue
 
@@ -42,15 +44,19 @@ def hangman():
 
         if letter not in word:
             print("Incorrect: ")
+            print("Wrong Guesses: ")
             wrong_guess.append(letter)
             wrong_guesses += 1
-            length_word -= 1
+            game_guesses -= 1
             for i in wrong_guess:
                 print(i, end=" ")
             print("\n")
 
         else:
             print("Correct!")
+            print("Wrong Guesses: ")
+            for i in wrong_guess:
+                print(i, end=" ")
             right_guess.append(letter)
             i = 0
             while i <= len(word) - 1:
@@ -59,9 +65,11 @@ def hangman():
                     i += 1
                 else:
                     i += 1
+            print("\n")
 
-        print_info(word, length_word, theme, letter, indicies, underscore)
+        print_info(word, game_guesses, theme, letter, indicies, underscore)
         indicies.clear()
+    print("The word is: ", word)
 
 
 def print_info(word, count, theme, letter, indices, placemats):
