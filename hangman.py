@@ -3,6 +3,7 @@
 
 
 def hangman():
+
     game_guesses = 8
     word = input("What is your word? \n")
     length_word = len(word)
@@ -23,10 +24,23 @@ def hangman():
     right_guess = []
     indicies = []
     wrong_guesses = 0
+    dup = False
 
     while game_guesses != 0:
         print("If you want to guess the word press 1!")
         letter = input("Guess a letter \n")
+        if letter in wrong_guess:
+            print("That is a duplicate letter! Pick another letter")
+            letter = input("Guess a letter")
+            dup = True
+
+        while dup is True:
+            if letter in wrong_guess:
+                print("That is a duplicate letter, that you guessed! Pick another letter")
+                letter = input("Guess a letter")
+            elif letter not in wrong_guess:
+                dup = False
+                continue
         if letter == "1":
             guess_word = input("What is the word you want to guess: ")
             if guess_word == word:
@@ -53,6 +67,15 @@ def hangman():
             print("\n")
 
         else:
+            guessed_right = 0
+
+            for k in right_guess:
+                if k in word:
+                    guessed_right += 1
+            if guessed_right == length_word - 1:
+                print("Correct! You win")
+                exit()
+
             print("Correct!")
             print("Wrong Guesses: ")
             for i in wrong_guess:
@@ -66,6 +89,10 @@ def hangman():
                 else:
                     i += 1
             print("\n")
+
+
+        guessed_right = 0
+
 
         print_info(word, game_guesses, theme, letter, indicies, underscore)
         indicies.clear()
