@@ -69,12 +69,11 @@ def hangman():
         else:
             guessed_right = 0
 
-            for k in right_guess:
-                if k in word:
-                    guessed_right += 1
-            if guessed_right == length_word - 1:
-                print("Correct! You win")
+                    #This condition is  broken
+            if len(right_guess) == length_word - 1:
+                print("Correct!! You win")
                 exit()
+
 
             print("Correct!")
             print("Wrong Guesses: ")
