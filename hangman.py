@@ -1,5 +1,4 @@
 # This is the hangman game
-from colorama import Back
 
 def hangman():
     game_guesses = 8
