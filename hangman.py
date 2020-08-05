@@ -1,9 +1,7 @@
 # This is the hangman game
-
-
+from colorama import Back
 
 def hangman():
-
     game_guesses = 8
     word = input("What is your word? \n")
     length_word = len(word)
@@ -54,10 +52,8 @@ def hangman():
 
                 continue
 
-
-
         if letter not in word:
-            print("Incorrect: ")
+            print('\033[31m' + 'Incorrect: ')
             print("Wrong Guesses: ")
             wrong_guess.append(letter)
             wrong_guesses += 1
@@ -69,13 +65,12 @@ def hangman():
         else:
             guessed_right = 0
 
-                    #This condition is  broken
+
             if len(right_guess) == length_word - 1:
                 print("Correct!! You win")
                 exit()
 
-
-            print("Correct!")
+            print('\033[32m' + 'Correct: ')
             print("Wrong Guesses: ")
             for i in wrong_guess:
                 print(i, end=" ")
@@ -89,9 +84,7 @@ def hangman():
                     i += 1
             print("\n")
 
-
         guessed_right = 0
-
 
         print_info(word, game_guesses, theme, letter, indicies, underscore)
         indicies.clear()
@@ -119,10 +112,6 @@ def print_info(word, count, theme, letter, indices, placemats):
         if guess_word == word:
             print("You Win, Congratulations Joyce/Igli!!!!!")
             exit(0)
-
-
-
-
 
 
 # Press the green button in the gutter to run the script.
